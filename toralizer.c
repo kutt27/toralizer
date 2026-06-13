@@ -27,7 +27,7 @@ struct socks_response {
     uint32_t dest_ip;
 };
 
-int main(int argc, chat *argv[]) {
+int main(int argc, char *argv[]) {
     if (argc < 3) {
         fprintf(stderr, "Usage: %s <target IP> <target PORT> \n", argv[0]);
         return 1;
@@ -64,7 +64,7 @@ int main(int argc, chat *argv[]) {
     req.version = 0x04;
     req.cmd = 0x01;
     req.dest_port = htons(target_port);
-    req.dest_ip = htons(target_ip);
+    req.dest_ip = inet_addr(target_ip);
     strncpy((char *)req.userid, USERNAME, sizeof(req.userid));
 
     // send the request packet to Tor
